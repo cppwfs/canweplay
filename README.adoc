@@ -1,6 +1,7 @@
 = Can We Play
 
 This is a Stream/Web application that accepts user input for such questions as:
+
 * I want to go kayaking in Sandton South Africa
 * I want to go walking in Roswell GA and give me results in metrics
 * Can I go fishing in Paris France?
