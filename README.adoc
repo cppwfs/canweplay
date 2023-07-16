@@ -1,0 +1,61 @@
+= Can We Play
+
+This is a Stream/Web application that accepts user input for such questions as:
+* I want to go kayaking in Sandton South Africa
+* I want to go walking in Roswell GA and give me results in metrics
+* Can I go fishing in Paris France?
+
+And it will respond by telling you if the weather conditions are good for that
+sport.
+
+This project utilizes OpenAPI to categorize your request and then lookup the
+weather via WeatherAPI for the location you specified, and then it determines whether it is good idea for you to participate in that sport.
+The results may look like:
+
+* It's a great day to go walking in roswell ga the wind speed is 5.6 mph and the temperature is 79.0.
+* The temperature isn't right for fishing today, the temperature is 31.1.
+
+The temperature or wind results are returned in either imperial or metric based on the location specified, or the requested unitSystem.
+
+This has been tested using RabbitMQ and input is accepted via the `categorizeweathercanWePlay-in-0` exchange by default.   Output is written to the `categorizeweathercanWePlay-out-0` exchange.
+
+== Requirements:
+
+* Java 17 or Above
+
+== Classes:
+
+* WeatherApplication - the Spring Boot Main Application
+* WeatherProperties - Properties for the keys for https://openai.com/[openAI] and https://www.weatherapi.com[weatherAPI].
+    * io.spring.weatherApiKey - Key used for the weatherAPI to get the weather for the specified location.
+    * io.spring.openAPIKey - Key used for the openAI for categorizing the data
+
+NOTE: if the weatherAPIKey or the openAIKey mock data will be returned for these api requests.   It will be for a user requesting if walking is good for Las Vegas Nevada. The mock weather will be sunny with a temperature of 107 and 0 MPH wind.
+
+== Build:
+
+[source,shell]
+----
+mvn clean package
+----
+
+== Run:
+
+[source,shell]
+----
+java -jar target/canWePlay-0.0.1-SNAPSHOT.jar
+----
+
+== Native Build:
+
+[source,shell]
+----
+mvn -Pnative native:compile
+----
+
+== Native Run:
+
+[source,shell]
+----
+./target/canWePlay
+----
